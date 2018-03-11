@@ -19,8 +19,8 @@ The goals / steps of this project are the following:
 # Files & Code Quality
 
 These are key files: 
-* [Vehicle_Detection.ipynb](./Vehicle-Detection.ipynb) (script used to setup & execute the pipeline)
-* [project_video_out2.mp4](./final_out.mp4) (a video recording of the vehicle detection pipeline in action)
+* [Vehicle_Detection.ipynb](./Vehicle_Detection.ipynb) (script used to setup & execute the pipeline)
+* [project_video_out2.mp4](./project_video_out2.mp4) (a video recording of the vehicle detection pipeline in action)
 * [README](./README.md) (this readme file has the write up for the project!)
 * Training data was downloaded from [vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/vehicles.zip) and [non-vehicle](https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip)
 
