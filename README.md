@@ -50,6 +50,23 @@ ycrcb= cv2.cvtColor(car_image, cv2.COLOR_RGB2YCrCb)
 ### 2. # Calculate HOG features
 I calculated HOG features for the images, as HOG is known to provide robust image feature outlines by detecting gradient changes across the image. One key point is to make sure to grayscale the image before calculating HOG.
 ```
+## HOG, Soatial, Color Histogram Features settings
+
+color_space = 'YCrCb'
+orient = 11
+pix_per_cell = 16
+cell_per_block = 2
+hog_feat= True
+spatial_feat= True
+hist_feat= True
+hog_channel = 'ALL'
+# Bin spatial parameters
+spatial_size = (32,32)
+# Histogram parameters
+hist_bins = 32
+
+### End HOG Features
+
 features, hog_image = get_hog_features(gray, orient, 
                         pix_per_cell, cell_per_block, 
                         vis=True, feature_vec=False)
@@ -59,7 +76,7 @@ features, hog_image = get_hog_features(gray, orient,
 
 ### 3. Feature extraction after normalization
 Next, I applied feature extraction on all the images, converted images into rows of image feature vectors.
-Each feature vector consists of HOG features calculated on all 3 channels, Y, Cr, Cb, and then appended together to make 1 long feature vector.
+Each feature vector consists of HOG features calculated on all 3 channels, Y, Cr, Cb, and then appended together to make 1 long feature vector. To enhance accuracy of SVC, I added in Spatial & Color Histogram features as well. This improved accuracy of SVC from 97.7% to over 99%, which got rid of several noisy False Positives in the video detection pipeline.
 
 ```
 car_features = extract_features(cars, color_space=color_space, spatial_size=spatial_size,
@@ -94,6 +111,7 @@ car_features = extract_features(cars, color_space=color_space, spatial_size=spat
                         pix_per_cell=pix_per_cell, cell_per_block=cell_per_block, hog_channel='ALL',
                         spatial_feat=spatial_feat, hist_feat=hist_feat, hog_feat=hog_feat)
 
+###PREVIOUSLY, WITHOUT SPATIAL & COLOR HISTOGRAM
 Total samples: 17760 feature vector length (864,)
 y labels length 17760
 2.28 Seconds to train SVC...
@@ -101,9 +119,19 @@ Test Accuracy of SVC =  0.9786
 My SVC predicts:  [ 1.  1.  0.  1.  0.  0.  1.  0.  1.  0.]
 For these 10 labels:  [ 1.  1.  0.  1.  0.  0.  1.  0.  1.  0.]
 0.00159 Seconds to predict 10 labels with SVC
+###
+
+### AFTER ADDING IN SPATIAL & COLOR HISTOGRAM FEATURE VECTORS
+Total samples: 17760 feature vector length (4356,)
+y labels length 17760
+10.16 Seconds to train SVC...
+Test Accuracy of SVC =  0.9907
+My SVC predicts:  [ 1.  1.  1.  1.  0.  0.  0.  0.  0.  0.]
+For these 10 labels:  [ 1.  1.  1.  1.  0.  0.  0.  0.  0.  0.]
+0.00175 Seconds to predict 10 labels with SVC
 
 ```
-I ended up with an accuracy of 97%, which seemed reasonably good without overfitting.
+I ended up with an accuracy of (99%), which hepled tremendously in getting rid of random False Positives.
 
 ### 3. Find car within image
 
