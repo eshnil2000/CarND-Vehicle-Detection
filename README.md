@@ -173,6 +173,29 @@ heatmap_img = apply_threshold(heatmap_img, 4)
 
 ```
 
+Heatmap
+
+![Heatmap](https://raw.githubusercontent.com/eshnil2000/CarND-Vehicle-Detection/master/result_images/heatmap1.png)
+
+Threshold
+
+![Threshold](https://raw.githubusercontent.com/eshnil2000/CarND-Vehicle-Detection/master/result_images/heatmap_threshold.png)
+
+
+Label
+
+![label](https://raw.githubusercontent.com/eshnil2000/CarND-Vehicle-Detection/master/result_images/label.png)
+
+
+Bounding Box
+
+![label](https://raw.githubusercontent.com/eshnil2000/CarND-Vehicle-Detection/master/result_images/bounding_box.png)
+
+
+
+
+
+
 ### 5. Final pipeline
 
 I assembled all the steps above in a single pipeline, to feed the video into.
